@@ -2,9 +2,8 @@ import { all, fork, takeEvery, call, put } from 'redux-saga/effects';
 import { AppActions } from './actions';
 import Axios from 'axios';
 import { server } from './constant'
-import App from "../App";
 
-const fetchMap = () => Axios.get(`${server.host}/api/game`).then(data => data).catch(err => console.log(err));
+const fetchMap = () => Axios.get(`${server.host}api/game`).then(data => data).catch(err => console.log(err));
 
 function* workerRequestGetMap(action) {
     try {
