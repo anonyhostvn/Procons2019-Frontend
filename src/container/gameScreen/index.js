@@ -74,19 +74,18 @@ class GameScreen extends Component {
     };
 
     getListAgent = (realMap, idPlayer) => {
-
+        console.log(realMap);
         return realMap.teams.filter(team => team.teamID === idPlayer)[0].agents;
     };
 
     render () {
         const { playField, visibleModal, choosingAgent } = this.state;
-        const { AppReducers } = this.props;
+        const { AppReducers, requestFixTurn, requestAction, isLoading } = this.props;
         const RenderObj = AppReducers.hasData ? RenderMap({AppReducers}) : null;
         return (
             <ComponentWrapper>
 
                 <h1> Procon 2019 </h1>
-
                 <Modal
                     title={"Chọn người chơi"}
                     visible={visibleModal}
@@ -125,12 +124,16 @@ class GameScreen extends Component {
                                 this.getListAgent(AppReducers.map, AppReducers.id).map(
                                     (agent,index) =>
                                         <Col key={index} span={10} offset={1}>
-                                            <FormActions agentID={agent.agentID} position={{x: agent.x, y: agent.y}}/>
+                                            <FormActions requestFixTurn={requestFixTurn} agentID={agent.agentID} position={{x: agent.x, y: agent.y}}/>
                                         </Col>
                                 )
                                     : null
                             }
                         </Row>
+                        <br/>
+                        <Button type={"primary"} onClick={requestAction} block loading={isLoading}>
+                            Chơi
+                        </Button>
                     </Sider>
                 </Layout>
 

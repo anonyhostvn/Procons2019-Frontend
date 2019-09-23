@@ -1,10 +1,15 @@
 import { AppActions } from './actions';
+import {setNewActions} from '../component/utility/utility';
+import {notification} from "antd";
 
 const initialState = {
     map: null,
     id: null,
-    isLoading: null,
-    hasData: null
+    isLoading: false,
+    hasData: null,
+    formInformation: {
+        actions: []
+    }
 };
 
 export const AppReducers = (state = initialState, {type, ...action}) => {
@@ -37,6 +42,32 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
             return {
                 ...state,
                 hasData: false,
+                isLoading: false
+            };
+
+        case AppActions.REQUEST_FIX_TURN:
+            return {
+                ...state,
+                formInformation: {
+                    actions: setNewActions(action.payload.prevActions, action.payload.newAction)
+                }
+            };
+
+        case AppActions.REQUEST_ACTION:
+            return {
+                ...state,
+                isLoading: true
+            };
+
+        case AppActions.SUCCESS_REQUEST_ACTION:
+            return {
+                ...state,
+                isLoading: false
+            };
+
+        case AppActions.ERROR_REQUEST_ACTION:
+            return {
+                ...state,
                 isLoading: false
             };
         default:

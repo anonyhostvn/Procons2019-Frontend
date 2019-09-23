@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
-import {Form, Input, Select, Radio, Row, Col, Icon} from 'antd';
+import {Form, Input, Select, Radio, Row, Col, Icon, Button} from 'antd';
 import { StyledRow } from './formActions.style';
-import { movingConstant } from './config';
+import { movingConstant, convertRequest } from './config';
 
 class FormActions extends Component {
    constructor(props) {
        super(props);
        this.state = {
            type: null,
-           direction: null
+           direction: null,
+           disableForm: false
        }
    }
 
@@ -24,14 +25,36 @@ class FormActions extends Component {
        });
    };
 
+   handleSubmit = () => {
+        const { form: {validateFieldsAndScroll}, agentID, requestFixTurn} = this.props;
+        validateFieldsAndScroll((errors, value) => {
+            if (!errors) {
+                this.setState({
+                    disableForm: true
+                });
+                console.log(convertRequest({...value,agentID}));
+                requestFixTurn({
+                    newAction: convertRequest({...value,agentID})
+                });
+            } else {
+                console.log('Submit form failed');
+            }
+        });
+   };
+
+   handleCancel = () => {
+        this.setState({
+            disableForm: false
+        })
+   };
+
     render(){
         const { form: {getFieldDecorator}, agentID, position } = this.props;
-        const { type } = this.state;
-        console.log(this.state.direction);
+        const { type, disableForm } = this.state;
 
         return(
             <div className={"formField"}>
-                <h1> Agent: {agentID} ({position.x},{position.y}) </h1>
+                <h1> Agent: {agentID} ({position.y},{position.x}) </h1>
                 <Form>
                     <Form.Item>
                         {
@@ -43,7 +66,7 @@ class FormActions extends Component {
                                     }
                                 ]
                             })(
-                                <Select placeholder={"Chọn loại nước đi"} onSelect={this.handleSelectChange}>
+                                <Select placeholder={"Chọn loại nước đi"} onSelect={this.handleSelectChange} disabled={disableForm}>
                                     <Select.Option key={movingConstant.move}>
                                         Di chuyển
                                     </Select.Option>
@@ -72,7 +95,7 @@ class FormActions extends Component {
                                                 }
                                             ]
                                         })(
-                                            <Radio.Group onChange={this.handleSelectDirectionChange}>
+                                            <Radio.Group onChange={this.handleSelectDirectionChange} disabled={disableForm}>
                                                 <StyledRow>
                                                     <Col span={8}>
                                                         <Radio.Button value={movingConstant.LeftUp.name}>
@@ -131,6 +154,16 @@ class FormActions extends Component {
                             </div>
                             :null
                     }
+
+                    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
+                        <Button onClick={this.handleSubmit} >
+                            Quyết định bước đi
+                        </Button>
+                        <div style={{width: "10px"}}> </div>
+                        <Button type={'danger'} onClick={this.handleCancel}>
+                            Bỏ quyết định bước đi
+                        </Button>
+                    </div>
                 </Form>
             </div>
         )

@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f91ac493-9d6c-4a96-b799-cc2707a6348d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/gameScreen.style.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/gameScreen.style.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/utility/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/utility/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/FormActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/FormActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/container/gameScreen/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constant.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/sagas.js" afterDir="false" />
@@ -28,7 +29,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wii-portal" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -95,6 +96,11 @@
       <workItem from="1568424426585" duration="561000" />
       <workItem from="1568452008480" duration="1907000" />
       <workItem from="1568469299485" duration="9479000" />
+      <workItem from="1568507305128" duration="108000" />
+      <workItem from="1568914274475" duration="5055000" />
+      <workItem from="1568955283897" duration="29000" />
+      <workItem from="1568955654002" duration="1080000" />
+      <workItem from="1569246585665" duration="9696000" />
     </task>
     <servers />
   </component>
