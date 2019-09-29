@@ -1,18 +1,8 @@
-import App from "../App";
-
 export const AppActions = {
+
     REQUEST_START_GAME: "REQUEST_START_GAME",
     SUCCESS_REQUEST_START_GAME: "SUCCESS_REQUEST_START_GAME",
     FAILED_REQUEST_START_GAME: "FAILED_REQUEST_START_GAME",
-
-    REQUEST_FINISH_GAME: "REQUEST_FINISH_GAME",
-    SUCCESS_REQUEST_FINISH_GAME: "SUCCESS_REQUEST_FINISH_GAME",
-    FAILED_REQUEST_FINISH_GAME: "FAILED_REQUEST_FINISH_GAME",
-
-    REQUEST_GET_MAP: "REQUEST_GET_MAP",
-    SUCCESS_REQUEST_GET_MAP: "SUCCESS_REQUEST_GET_MAP",
-    FAILED_REQUEST_GET_MAP: "FAILED_REQUEST_GET_MAP",
-
     requestStartGame: (params) => {
         return (dispatch, getState) => {
             dispatch({
@@ -24,6 +14,9 @@ export const AppActions = {
         }
     },
 
+    REQUEST_FINISH_GAME: "REQUEST_FINISH_GAME",
+    SUCCESS_REQUEST_FINISH_GAME: "SUCCESS_REQUEST_FINISH_GAME",
+    FAILED_REQUEST_FINISH_GAME: "FAILED_REQUEST_FINISH_GAME",
     requestFinishGame: (params) => {
         return (dispatch, getState) => {
             dispatch ({
@@ -35,6 +28,9 @@ export const AppActions = {
         }
     },
 
+    REQUEST_GET_MAP: "REQUEST_GET_MAP",
+    SUCCESS_REQUEST_GET_MAP: "SUCCESS_REQUEST_GET_MAP",
+    FAILED_REQUEST_GET_MAP: "FAILED_REQUEST_GET_MAP",
     requestGetMap: (params) => {
         return (dispatch, getState) => {
             dispatch ({
@@ -67,6 +63,34 @@ export const AppActions = {
         return (dispatch, getState) => {
             dispatch({
                 type: AppActions.REQUEST_ACTION,
+                payload: {
+                    ...props
+                }
+            })
+        }
+    },
+
+    REQUEST_CONTINUE_GAME: "REQUEST_CONTINUE_GAME",
+    SUCCESS_REQUEST_CONTINUE_GAME: "SUCCESS_REQUEST_CONTINUE_GAME",
+    ERROR_REQUEST_CONTINUE_GAME: "ERROR_REQUEST_CONTINUE_GAME",
+    requestContinueGame: (props) => {
+        return (dispatch, getState) => {
+            dispatch({
+                type: AppActions.REQUEST_CONTINUE_GAME,
+                payload: {
+                    ...props
+                }
+            })
+        }
+    },
+
+    REQUEST_GET_MAP_INFO: "REQUEST_GET_MAP_INFO",
+    SUCCESS_REQUEST_GET_MAP_INFO: "SUCCESS_REQUEST_GET_MAP_INFO",
+    ERROR_REQUEST_GET_MAP_INFO: "ERROR_REQUEST_GET_MAP_INFO",
+    requestGetMapInfo: (props) => {
+        return (dispatch, getState) => {
+            dispatch ({
+                type: AppActions.REQUEST_GET_MAP_INFO,
                 payload: {
                     ...props
                 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, Select, Radio, Row, Col, Icon, Button} from 'antd';
+import {Form, Select, Radio, Col, Icon, Button} from 'antd';
 import { StyledRow } from './formActions.style';
 import { movingConstant, convertRequest } from './config';
 

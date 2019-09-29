@@ -1,6 +1,5 @@
 import { AppActions } from './actions';
 import {setNewActions} from '../component/utility/utility';
-import {notification} from "antd";
 
 const initialState = {
     map: null,
@@ -9,7 +8,9 @@ const initialState = {
     hasData: null,
     formInformation: {
         actions: []
-    }
+    },
+    mapId: null,
+    maxTurn: 0
 };
 
 export const AppReducers = (state = initialState, {type, ...action}) => {
@@ -17,9 +18,10 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
         case (AppActions.REQUEST_START_GAME):
             return {
                 ...state,
-                id: action.payload.id,
+                id: parseInt(action.payload.teamId),
                 hasData: false,
-                isLoading: false
+                isLoading: false,
+                mapId: action.payload.mapId,
             };
 
         case AppActions.REQUEST_GET_MAP:
@@ -62,7 +64,10 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
         case AppActions.SUCCESS_REQUEST_ACTION:
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                formInformation: {
+                    actions: []
+                }
             };
 
         case AppActions.ERROR_REQUEST_ACTION:
@@ -70,6 +75,42 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
                 ...state,
                 isLoading: false
             };
+
+        case AppActions.REQUEST_CONTINUE_GAME:
+            return {
+                ...state,
+                id: parseInt(action.payload.teamId),
+                mapId: action.payload.mapId
+            };
+
+        case AppActions.ERROR_REQUEST_CONTINUE_GAME:
+            return {
+                ...state
+            };
+
+        case AppActions.SUCCESS_REQUEST_CONTINUE_GAME:
+            return {
+                ...state
+            };
+
+        case AppActions.REQUEST_GET_MAP_INFO:
+            return {
+                ...state,
+                isLoading: true
+            };
+
+        case AppActions.ERROR_REQUEST_GET_MAP_INFO:
+            return {
+                ...state,
+                isLoading: false
+            };
+
+        case AppActions.SUCCESS_REQUEST_GET_MAP_INFO:
+            return {
+                ...state,
+                maxTurn: parseInt(action.payload.maxTurn)
+            };
+
         default:
             return state;
     }
