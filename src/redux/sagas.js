@@ -1,18 +1,68 @@
 import { all, fork, takeEvery, call, put, select } from 'redux-saga/effects';
 import { AppActions } from './actions';
 import Axios from 'axios';
-import { server } from './constant';
+import { server} from './constant';
 import * as selector from './selector';
+import {matchId} from './actions';
 
-const fetchMap = (mapId) => Axios.get(`${server.host}/matches/${mapId}`).then(data => data).catch(err => console.log(err));
-const doAction = (id, body) => Axios.post(`${server.host}/matches/${id}/action`, {...body}).then(data => data).catch(err => console.log(err));
+const instanceAxios = (props) => Axios({
+    method: props.method,
+    baseURL: props.baseUrl,
+    headers: {
+        Authorization: props.token
+    },
+    data: props.data
+});
+
 const startGame = (mapId) => Axios.get(`${server.host}/matches/start/${mapId}`).then(data => data).catch(err => console.log(err));
 const getMapInfo = () => Axios.get(`${server.host}/matches`).then(data => data).catch(err => console.log(err));
 
+function* workerRequestSetToken(action) {
+    try {
+        const token = yield select(selector.token);
+        const response = yield call(
+            () => instanceAxios({
+            baseUrl: `${server.host}/matches`,
+            method: 'get',
+            token
+        }).then(data => data).catch(err => console.log(err)) );
+
+        console.log(response);
+        if (response.status === 200) {
+            yield put ({
+                type: AppActions.SUCCESS_REQUEST_SET_TOKEN,
+                payload: {
+                    teamId: response.data[0].teamID
+                }
+            });
+        } else {
+            yield put ({
+                type: AppActions.ERROR_REQUEST_SET_TOKEN
+            });
+        }
+
+    } catch (e) {
+        yield put ({
+            type: AppActions.ERROR_REQUEST_SET_TOKEN
+        })
+    }
+}
+
+function* requestSetToken() {
+    yield takeEvery(AppActions.REQUEST_SET_TOKEN, workerRequestSetToken);
+}
+
 function* workerRequestGetMap(action) {
     try {
-        const mapId = yield select(selector.mapId);
-        const response = yield call(fetchMap, mapId);
+        const token = yield select(selector.token);
+        const response = yield call(
+            () => instanceAxios({
+                baseUrl: `${server.host}/matches/${action.payload.matchId}`,
+                method: 'get',
+                token
+            }).then(data => data).catch(err => console.log(err))
+        );
+        console.log(response);
         if (response.status === 200) {
             yield put({
                 type: AppActions.SUCCESS_REQUEST_GET_MAP,
@@ -38,17 +88,28 @@ function* requestGetMap() {
 
 function* workerRequestAction(action){
     try {
+        const token = yield select(selector.token);
         const body = yield select(selector.actions);
-        const id = yield select(selector.teamId);
         console.log("Start send action ...");
-        const response = yield call(() => doAction(id, body));
+        const response = yield call(
+            () => instanceAxios({
+                baseUrl: `${server.host}/matches/${action.payload.matchId}/action`,
+                method: 'post',
+                token,
+                data: body
+            }).then(data => data).catch(err => console.log(err))
+        );
+
         console.log("End send ...");
         if (response.status === 200){
             yield put({
                 type: AppActions.SUCCESS_REQUEST_ACTION
             });
             yield put({
-                type: AppActions.REQUEST_GET_MAP
+                type: AppActions.REQUEST_GET_MAP,
+                payload: {
+                    matchId: matchId
+                }
             })
         } else {
             yield put({
@@ -152,6 +213,7 @@ export function* rootSagas () {
         fork(requestAction),
         fork(requestStartGame),
         fork(requestContinueGame),
-        fork(requestGetMapInfo)
+        fork(requestGetMapInfo),
+        fork(requestSetToken)
     ])
 }

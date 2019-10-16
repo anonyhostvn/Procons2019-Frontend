@@ -3,7 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f91ac493-9d6c-4a96-b799-cc2707a6348d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/container/gameScreen/utility.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/container/gameScreen/utility.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/sagas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/selector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/selector.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +106,8 @@
       <workItem from="1569297242534" duration="726000" />
       <workItem from="1569298074595" duration="700000" />
       <workItem from="1569761182960" duration="14043000" />
+      <workItem from="1571184960569" duration="626000" />
+      <workItem from="1571234077302" duration="12082000" />
     </task>
     <servers />
   </component>
