@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ComponentWrapper } from './gameScreen.style';
 import { AppActions } from '../../redux/actions';
 import { connect } from 'react-redux';
-import {Modal, Button, notification, Layout, Row, Col, Input, Descriptions} from 'antd';
+import {Modal, Button, notification, Layout, Row, Col, Input, Descriptions, Select} from 'antd';
 import { RenderMap } from './utility';
 import FormActions from './FormActions';
 
@@ -104,9 +104,15 @@ class GameScreen extends Component {
         requestSetToken({token: recentToken});
     };
 
+    handleSetMatchId = (values) => {
+        const {requestSetMatchId} = this.props;
+        requestSetMatchId({matchId: values});
+    };
+
     render () {
         const { visibleModal , recentToken} = this.state;
         const { AppReducers, requestFixTurn, requestAction} = this.props;
+        const {listMatches, matchId} = AppReducers;
         const RenderObj = AppReducers.hasData ? RenderMap({AppReducers}) : null;
         return (
             <ComponentWrapper>
@@ -141,6 +147,20 @@ class GameScreen extends Component {
                     onCancel={this.notChoosePlayer}
                 >
                     <Input placeholder={"Nhập token"} values={recentToken} onChange={(e) => this.setState({recentToken: e.target.value})}/>
+                    <Select placeholder={"Chọn trận"} style={{width: '100%'}} value={matchId} onChange={this.handleSetMatchId}>
+                        {
+                            listMatches.length > 0 ?
+                            listMatches.map(match =>
+                                <Select.Option
+                                    key={match.id}
+                                    value={match.id}
+                                >
+                                    {match.id}
+                                </Select.Option>
+                            )
+                                :null
+                        }
+                    </Select>
 
                     <Button block onClick={this.handleSetToken} loading={AppReducers.isLoading}> Check token </Button>
 

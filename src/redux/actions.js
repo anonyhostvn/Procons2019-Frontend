@@ -1,5 +1,3 @@
-export const matchId = 1;
-
 export const AppActions = {
 
     REQUEST_START_GAME: "REQUEST_START_GAME",
@@ -38,8 +36,7 @@ export const AppActions = {
             dispatch ({
                 type: AppActions.REQUEST_GET_MAP,
                 payload: {
-                    ...params,
-                    matchId
+                    ...params
                 }
             })
         }
@@ -67,8 +64,7 @@ export const AppActions = {
             dispatch({
                 type: AppActions.REQUEST_ACTION,
                 payload: {
-                    ...props,
-                    matchId
+                    ...props
                 }
             })
         }
@@ -96,8 +92,7 @@ export const AppActions = {
             dispatch ({
                 type: AppActions.REQUEST_GET_MAP_INFO,
                 payload: {
-                    ...props,
-                    matchId
+                    ...props
                 }
             })
         }
@@ -110,6 +105,16 @@ export const AppActions = {
         return (dispatch, getState) => {
             dispatch ({
                 type: AppActions.REQUEST_SET_TOKEN,
+                payload: props
+            })
+        }
+    },
+
+    REQUEST_SET_MATCH_ID: "REQUEST_SET_MATCH_ID",
+    requestSetMatchId : (props) => {
+        return (dispatch, getState) => {
+            dispatch({
+                type: AppActions.REQUEST_SET_MATCH_ID,
                 payload: props
             })
         }

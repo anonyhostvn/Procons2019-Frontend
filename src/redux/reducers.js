@@ -10,11 +10,12 @@ const initialState = {
     formInformation: {
         actions: []
     },
-    mapId: null,
+    matchId: null,
     maxTurn: 0,
     token: null,
     isTokenValid: false,
-    teamId: null
+    teamId: null,
+    listMatches: []
 };
 
 export const AppReducers = (state = initialState, {type, ...action}) => {
@@ -47,7 +48,8 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
                 isTokenValid: true,
                 isLoading: false,
                 teamId: action.payload.teamId,
-                id: action.payload.teamId
+                id: action.payload.teamId,
+                listMatches: action.payload.listMatches
             };
 
         case AppActions.ERROR_REQUEST_SET_TOKEN:
@@ -147,6 +149,12 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
             return {
                 ...state,
                 maxTurn: parseInt(action.payload.maxTurn)
+            };
+
+        case AppActions.REQUEST_SET_MATCH_ID:
+            return {
+                ...state,
+                matchId: action.payload.matchId
             };
 
         default:

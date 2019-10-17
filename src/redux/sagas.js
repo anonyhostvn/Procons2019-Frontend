@@ -3,7 +3,6 @@ import { AppActions } from './actions';
 import Axios from 'axios';
 import { server} from './constant';
 import * as selector from './selector';
-import {matchId} from './actions';
 
 const instanceAxios = (props) => Axios({
     method: props.method,
@@ -27,12 +26,12 @@ function* workerRequestSetToken(action) {
             token
         }).then(data => data).catch(err => console.log(err)) );
 
-        console.log(response);
         if (response.status === 200) {
             yield put ({
                 type: AppActions.SUCCESS_REQUEST_SET_TOKEN,
                 payload: {
-                    teamId: response.data[0].teamID
+                    teamId: response.data[0].teamID,
+                    listMatches: response.data
                 }
             });
         } else {
@@ -55,9 +54,10 @@ function* requestSetToken() {
 function* workerRequestGetMap(action) {
     try {
         const token = yield select(selector.token);
+        const matchId = yield select(selector.matchId);
         const response = yield call(
             () => instanceAxios({
-                baseUrl: `${server.host}/matches/${action.payload.matchId}`,
+                baseUrl: `${server.host}/matches/${matchId}`,
                 method: 'get',
                 token
             }).then(data => data).catch(err => console.log(err))
@@ -90,10 +90,11 @@ function* workerRequestAction(action){
     try {
         const token = yield select(selector.token);
         const body = yield select(selector.actions);
+        const matchId = yield select(selector.matchId);
         console.log("Start send action ...");
         const response = yield call(
             () => instanceAxios({
-                baseUrl: `${server.host}/matches/${action.payload.matchId}/action`,
+                baseUrl: `${server.host}/matches/${matchId}/action`,
                 method: 'post',
                 token,
                 data: body
