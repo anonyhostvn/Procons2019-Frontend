@@ -96,5 +96,27 @@ export const AppActions = {
                 }
             })
         }
+    },
+
+    REQUEST_SET_TOKEN: "REQUEST_SET_TOKEN",
+    SUCCESS_REQUEST_SET_TOKEN: "SUCCESS_REQUEST_SET_TOKEN",
+    ERROR_REQUEST_SET_TOKEN: "ERROR_REQUEST_SET_TOKEN",
+    requestSetToken: (props) => {
+        return (dispatch, getState) => {
+            dispatch ({
+                type: AppActions.REQUEST_SET_TOKEN,
+                payload: props
+            })
+        }
+    },
+
+    REQUEST_SET_MATCH_ID: "REQUEST_SET_MATCH_ID",
+    requestSetMatchId : (props) => {
+        return (dispatch, getState) => {
+            dispatch({
+                type: AppActions.REQUEST_SET_MATCH_ID,
+                payload: props
+            })
+        }
     }
 };

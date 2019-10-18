@@ -1,3 +1,8 @@
+#### Để thay đổi host, vào : 
+**D:\Workspace\Procons2019-Frontend\src\redux\constant.js**
+#### Để chọn matchId, vào:
+**D:\Workspace\Procons2019-Frontend\src\redux\actions.js**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,5 +1,6 @@
 import { AppActions } from './actions';
 import {setNewActions} from '../component/utility/utility';
+import {notification} from "antd";
 
 const initialState = {
     map: null,
@@ -9,8 +10,12 @@ const initialState = {
     formInformation: {
         actions: []
     },
-    mapId: null,
-    maxTurn: 0
+    matchId: null,
+    maxTurn: 0,
+    token: null,
+    isTokenValid: false,
+    teamId: null,
+    listMatches: []
 };
 
 export const AppReducers = (state = initialState, {type, ...action}) => {
@@ -22,6 +27,41 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
                 hasData: false,
                 isLoading: false,
                 mapId: action.payload.mapId,
+            };
+
+        case AppActions.REQUEST_SET_TOKEN:
+            return {
+                ...state,
+                token: action.payload.token,
+                isTokenValid: false,
+                isLoading: true
+            };
+
+        case AppActions.SUCCESS_REQUEST_SET_TOKEN:
+            notification.success({
+                message: 'Token hợp lệ',
+                description:
+                    '',
+            });
+            return {
+                ...state,
+                isTokenValid: true,
+                isLoading: false,
+                teamId: action.payload.teamId,
+                id: action.payload.teamId,
+                listMatches: action.payload.listMatches
+            };
+
+        case AppActions.ERROR_REQUEST_SET_TOKEN:
+            notification.error({
+                message: 'Token không hợp lệ',
+                description:
+                    '',
+            });
+            return {
+                ...state,
+                isTokenValid: false,
+                isLoading: false
             };
 
         case AppActions.REQUEST_GET_MAP:
@@ -109,6 +149,12 @@ export const AppReducers = (state = initialState, {type, ...action}) => {
             return {
                 ...state,
                 maxTurn: parseInt(action.payload.maxTurn)
+            };
+
+        case AppActions.REQUEST_SET_MATCH_ID:
+            return {
+                ...state,
+                matchId: action.payload.matchId
             };
 
         default:

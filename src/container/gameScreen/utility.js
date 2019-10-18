@@ -41,6 +41,7 @@ export const getAgentId = props => {
 
 export const RenderMap = props => {
     const { id, map } = props.AppReducers;
+    console.log("In render map", id);
     const width = map.width, height = map.height;
     let ResTable = [];
     for (let i = 0 ; i < height ; i ++) {
